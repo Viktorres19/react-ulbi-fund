@@ -1,14 +1,8 @@
 import {useState} from 'react'
+import Counter from './components/Counter'
 const App = () => {
-  const [likes, setLikes] = useState(0)
   const [value, setValue] = useState('Input text')
 
-  const increment = () => {
-    setLikes(likes + 1)
-  }
-  const decrement = () => {
-    setLikes(likes - 1)
-  }
 
   return (
     <div className="App">
@@ -20,15 +14,9 @@ const App = () => {
           onChange={event => setValue(event.target.value)}
         />
       </div>
-      <div>
-        { likes }
-      </div>
-      <div>
-        <button onClick={increment}>Increment</button>
-        <button onClick={decrement}>Decrement</button>
-      </div>
+      <Counter />
     </div>
   );
 }
 
-export default App;
+export default App
