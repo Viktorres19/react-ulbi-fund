@@ -1,41 +1,17 @@
 import './styles/App.css'
+import {useState} from 'react'
+import PostList from './components/PostList'
 const App = () => {
+  const [posts, setPosts] = useState([
+    {id: 1, title: 'Javascript', body: 'Description'},
+    {id: 2, title: 'PHP', body: 'Back End'},
+    {id: 3, title: 'CSS', body: 'Styles'},
+    {id: 4, title: 'HTML', body: 'Layout'},
+  ])
 
   return (
     <div className="App">
-      <div className="post">
-        <div className="post__content">
-          <strong>1. Javascipt</strong>
-          <div>
-            Javascript - мова програмування
-          </div>
-        </div>
-        <div className="post__btns">
-          <button>Видалити</button>
-        </div>
-      </div>
-      <div className="post">
-        <div className="post__content">
-          <strong>1. Javascipt</strong>
-          <div>
-            Javascript - мова програмування
-          </div>
-        </div>
-        <div className="post__btns">
-          <button>Видалити</button>
-        </div>
-      </div>
-      <div className="post">
-        <div className="post__content">
-          <strong>1. Javascipt</strong>
-          <div>
-            Javascript - мова програмування
-          </div>
-        </div>
-        <div className="post__btns">
-          <button>Видалити</button>
-        </div>
-      </div>
+      <PostList posts={posts} title="Перелік постів 1" />
     </div>
   );
 }
