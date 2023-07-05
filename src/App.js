@@ -1,20 +1,17 @@
+import './styles/App.css'
 import {useState} from 'react'
-import Counter from './components/Counter'
+import PostList from './components/PostList'
 const App = () => {
-  const [value, setValue] = useState('Input text')
-
+  const [posts, setPosts] = useState([
+    {id: 1, title: 'Javascript', body: 'Description'},
+    {id: 2, title: 'PHP', body: 'Back End'},
+    {id: 3, title: 'CSS', body: 'Styles'},
+    {id: 4, title: 'HTML', body: 'Layout'},
+  ])
 
   return (
     <div className="App">
-      <div>
-        <h2>{value}</h2>
-        <input
-          type="text"
-          value={value}
-          onChange={event => setValue(event.target.value)}
-        />
-      </div>
-      <Counter />
+      <PostList posts={posts} title="Перелік постів 1" />
     </div>
   );
 }
