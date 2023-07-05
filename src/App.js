@@ -1,5 +1,5 @@
 import './styles/App.css'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import axios from 'axios'
 import PostList from './components/PostList'
 import PostForm from './components/PostForm'
@@ -14,6 +14,10 @@ const App = () => {
   const [filter, setFilter] = useState({sort: '', query: ''})
   const [modal, setModal] = useState(false)
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
+
+  useEffect(() => {
+    fetchPosts()
+  }, []) //щоб функція відпрацювала один раз треба масив залежностей залишити пустим (можна задавати залежності через зап'яту)
 
   const createPost = (newPost) => {
     /*розгортаємо старий масив в кінець цього масиву добавляємо новий пост*/
