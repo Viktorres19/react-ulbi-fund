@@ -11,6 +11,11 @@ const App = () => {
 
   return (
     <div className="App">
+      <form>
+        <input type="text" placeholder="Назва посту" />
+        <input type="text" placeholder="Опис посту" />
+        <button>Створити пост</button>
+      </form>
       <PostList posts={posts} title="Перелік постів 1" />
     </div>
   );
