@@ -3,6 +3,7 @@ import {useState} from 'react'
 import PostList from './components/PostList'
 import PostForm from './components/PostForm'
 import MySelect from './components/UI/select/MySelect'
+import MyInput from './components/UI/input/MyInput'
 const App = () => {
   const [posts, setPosts] = useState([
     {id: 1, title: 'Javascript', body: 'Description'},
@@ -12,6 +13,17 @@ const App = () => {
   ])
 
   const [selectedSort, setSelectedSort] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
+
+  function getSortedPosts() {
+    console.log('Sorted posts function has executed')
+    if(selectedSort) {
+      return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
+    }
+    return posts
+  }
+
+  const sortedPosts = getSortedPosts()
 
   const createPost = (newPost) => {
     /*розгортаємо старий масив в кінець цього масиву добавляємо новий пост*/
@@ -25,8 +37,6 @@ const App = () => {
 
   const sortPosts = (sort) => {
     setSelectedSort(sort)
-    /*розгорнемо пости в новий масив (копію) і відсортуємо цей масив, тому що напряму стан мутувати не можна*/
-    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
   }
 
   return (
@@ -34,6 +44,12 @@ const App = () => {
       <PostForm create={createPost} />
       <hr style={{margin: '15px 0'}}/>
       <div>
+        <MyInput
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          placeholder="Пошук..."
+        />
+        <hr style={{margin: '15px 0'}}/>
         <MySelect
           value={selectedSort}
           onChange={sortPosts}
@@ -45,7 +61,7 @@ const App = () => {
         />
       </div>
       {posts.length
-        ? <PostList remove={removePost} posts={posts} title="Перелік постів 1" />
+        ? <PostList remove={removePost} posts={sortedPosts} title="Перелік постів 1" />
         : <h1 style={{textAlign: 'center'}}>Пости не були знайдені</h1>
       }
     </div>
