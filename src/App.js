@@ -1,22 +1,41 @@
-import {useState} from 'react'
-import Counter from './components/Counter'
-import ClassCounter from './components/ClassCounter'
+import './styles/App.css'
 const App = () => {
-  const [value, setValue] = useState('Input text')
-
 
   return (
     <div className="App">
-      <div>
-        <h2>{value}</h2>
-        <input
-          type="text"
-          value={value}
-          onChange={event => setValue(event.target.value)}
-        />
+      <div className="post">
+        <div className="post__content">
+          <strong>1. Javascipt</strong>
+          <div>
+            Javascript - мова програмування
+          </div>
+        </div>
+        <div className="post__btns">
+          <button>Видалити</button>
+        </div>
       </div>
-      <Counter />
-      <ClassCounter />
+      <div className="post">
+        <div className="post__content">
+          <strong>1. Javascipt</strong>
+          <div>
+            Javascript - мова програмування
+          </div>
+        </div>
+        <div className="post__btns">
+          <button>Видалити</button>
+        </div>
+      </div>
+      <div className="post">
+        <div className="post__content">
+          <strong>1. Javascipt</strong>
+          <div>
+            Javascript - мова програмування
+          </div>
+        </div>
+        <div className="post__btns">
+          <button>Видалити</button>
+        </div>
+      </div>
     </div>
   );
 }
