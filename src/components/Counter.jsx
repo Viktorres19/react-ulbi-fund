@@ -20,7 +20,7 @@ const Counter = () => {
 				<button onClick={decrement}>Decrement</button>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export default Counter
