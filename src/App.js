@@ -1,5 +1,5 @@
 import './styles/App.css'
-import {useState, useRef} from 'react'
+import {useState} from 'react'
 import PostList from './components/PostList'
 import MyButton from './components/UI/button/MyButton'
 import MyInput from './components/UI/input/MyInput'
