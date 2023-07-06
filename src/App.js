@@ -9,12 +9,17 @@ import Loader from './components/UI/Loader/Loader'
 
 import {usePosts} from './hooks/usePosts'
 import PostService from './API/PostService'
+import {useFetching} from "./hooks/useFetching";
 const App = () => {
   const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({sort: '', query: ''})
   const [modal, setModal] = useState(false)
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
-  const [isPostsLoading, setIsPostsLoading] = useState(false)
+  /*Обробка індикації завантаження і обробку помилки. Викликаємо хук, в який треба передати деякий колбек (асинхронний)*/
+  const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+    const posts = await PostService.getAll()
+    setPosts(posts)
+  })
 
   useEffect(() => {
     fetchPosts()
@@ -26,20 +31,12 @@ const App = () => {
     setModal(false)
   }
 
-  async function fetchPosts() {
-    setIsPostsLoading(true)
-    const posts = await PostService.getAll()
-    setPosts(posts)
-    setIsPostsLoading(false)
-  }
-
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
   return (
     <div className="App">
-      <button onClick={fetchPosts}>GET POSTS</button>
       <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
         Створити пост
       </MyButton>
@@ -50,6 +47,9 @@ const App = () => {
         filter={filter}
         setFilter={setFilter}
       />
+      {postError &&
+        <h1>Відбулася помилка ${postError}</h1>
+      }
       {isPostsLoading
         ? <div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}><Loader /></div>
         : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Перелік постів 1" />
